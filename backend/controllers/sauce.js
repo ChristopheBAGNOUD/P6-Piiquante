@@ -1,9 +1,10 @@
 const Sauce = require("../models/sauce");
 const fs = require('fs');
 
+// création d'une sauce 
 exports.createSauce = (req, res, next) =>{
   const sauceFormat = JSON.parse(req.body.sauce);
-  // delete sauceFormat._id;
+  delete sauceFormat._id;
   const sauce = new Sauce({
   ...sauceFormat,
   imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
@@ -17,12 +18,14 @@ exports.createSauce = (req, res, next) =>{
     .catch(error => res.status(400).json({error}));
 };
 
+// affichage de toutes les sauces
 exports.getAllSauce = (req, res, next) =>{
   Sauce.find()
   .then((sauce) => res.status(200).json(sauce))
   .catch(error => res.status(400).json({error}));
 };
 
+// affichage d'une sauce 
 exports.getOneSauce = (req, res, next) =>{
   Sauce.findOne({_id: req.params.id}).then((sauce) => res.status(200).json(sauce))
   .catch(error => res.status(400).json({error}));
@@ -30,7 +33,7 @@ exports.getOneSauce = (req, res, next) =>{
 };
 
 
-
+// supression d'une sauce par le créateur de celle-ci
 exports.deleteSauce = (req, res, next) =>{
   Sauce.findOne({ _id: req.params.id })
   .then(sauce => {
@@ -44,6 +47,7 @@ exports.deleteSauce = (req, res, next) =>{
   .catch(error => res.status(400).json({ error }));
 };
 
+// modification d'une sauce par le créateur de celle-ci
 exports.modifySauce = (req, res, next) => {
   if (req.file) {
       Sauce.findOne({ _id: req.params.id })
@@ -68,6 +72,7 @@ exports.modifySauce = (req, res, next) => {
   }
 };
 
+// Like et dislike d'une sauce
 exports.likeSauce = (req, res, next) => {
   etatLike = req.body.like;
   if(etatLike === 1){

@@ -2,7 +2,7 @@ const tuser = require('../models/tuser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-
+// création d'un utilisateur sur le site
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
     .then(hash => {
@@ -18,6 +18,7 @@ exports.signup = (req, res, next) => {
 
 };
 
+// connexion d'un utilisateur sur le site 
 exports.login = (req, res, next) => {
     tuser.findOne({ email: req.body.email})
     .then(user => {

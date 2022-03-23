@@ -15,6 +15,7 @@ app.use((req, res, next) => {
   next();
 });
 
+// Connexion a la database de mongoose
 mongoose.connect('mongodb+srv://Christophe:christophe@cluster0.mibyv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
   { useNewUrlParser: true,
     useUnifiedTopology: true })
