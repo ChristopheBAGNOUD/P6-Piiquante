@@ -3,6 +3,7 @@ const fs = require('fs');
 
 // création d'une sauce 
 exports.createSauce = (req, res, next) =>{
+  //Mise au format Json
   const sauceFormat = JSON.parse(req.body.sauce);
   delete sauceFormat._id;
   const sauce = new Sauce({
@@ -35,6 +36,7 @@ exports.getOneSauce = (req, res, next) =>{
 
 // supression d'une sauce par le créateur de celle-ci
 exports.deleteSauce = (req, res, next) =>{
+// Récuperation d'une sauce
   Sauce.findOne({ _id: req.params.id })
   .then(sauce => {
     const filename = sauce.imageUrl.split('/images/')[1];
