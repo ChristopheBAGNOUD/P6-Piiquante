@@ -1,4 +1,6 @@
+## Dossiers Node_Modules non envoyés au repo GIT ##
 node_modules
 
+## Dossier Images du backend non envoyé au repo GIT ##
 backend/images
 
